@@ -524,9 +524,12 @@
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\" />
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\GCC\" />
     <Folder Include="src\config\" />
+    <Folder Include="workspace\sys" />
     <Folder Include="workspace\peripheral_interface" />
     <Folder Include="workspace\peripheral_interface\inc" />
     <Folder Include="workspace\peripheral_interface\src" />
+    <Folder Include="workspace\sys\inc" />
+    <Folder Include="workspace\sys\src" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\ASF\sam\drivers\usart\usart.c">
@@ -542,6 +545,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\peripheral_interface\src\yy_uart_api.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\sys\src\redirection.c">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\ASF\sam\drivers\usart\usart.h">

@@ -41,7 +41,20 @@ int main (void)
 	yy_peripheral_init();
 	
 	/* Start */
-	yy_show("------- Start -------\r\n");
+	printf("------- Start -------\r\n");
 
-	
+	/* SHELL*/
+	printf("> ");
+	while (1) {
+		uint8_t data;
+
+		/* block */
+		data = getchar();
+		printf("%c", data);
+		
+		if (data == '\n' || data == '\r') {
+			printf("\r\n");
+			printf("> ");
+		}
+	}
 }

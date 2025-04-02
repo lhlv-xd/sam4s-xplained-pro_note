@@ -8,6 +8,7 @@
 #include "yy_peripheral_init.h"
 
 
+
 void yy_peripheral_init()
 {
 	sysclk_init();

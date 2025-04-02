@@ -33,28 +33,20 @@
  */
 #include <asf.h>
 #include "yy_peripheral_init.h"
+#include "yy_shell_interface.h"
 
 int main (void)
 {
 	/* Initialize */
 	board_init();
 	yy_peripheral_init();
+	yy_shell_init();
+
 	
 	/* Start */
 	printf("------- Start -------\r\n");
 
-	/* SHELL*/
-	printf("> ");
-	while (1) {
-		uint8_t data;
-
-		/* block */
-		data = getchar();
-		printf("%c", data);
+	while(1) {
 		
-		if (data == '\n' || data == '\r') {
-			printf("\r\n");
-			printf("> ");
-		}
 	}
 }

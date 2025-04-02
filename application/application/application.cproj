@@ -389,6 +389,7 @@
       <Value>../src/ASF/common/services/serial</Value>
       <Value>../src/ASF/sam/drivers/usart</Value>
       <Value>../workspace/peripheral_interface/inc</Value>
+      <Value>../workspace/shell/inc</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -524,11 +525,13 @@
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\" />
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\GCC\" />
     <Folder Include="src\config\" />
+    <Folder Include="workspace\shell" />
+    <Folder Include="workspace\shell\inc" />
+    <Folder Include="workspace\shell\src" />
     <Folder Include="workspace\sys" />
     <Folder Include="workspace\peripheral_interface" />
     <Folder Include="workspace\peripheral_interface\inc" />
     <Folder Include="workspace\peripheral_interface\src" />
-    <Folder Include="workspace\sys\inc" />
     <Folder Include="workspace\sys\src" />
   </ItemGroup>
   <ItemGroup>
@@ -545,6 +548,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\peripheral_interface\src\yy_uart_api.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\shell\inc\yy_shell_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\shell\src\yy_shell_interface.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\sys\src\redirection.c">

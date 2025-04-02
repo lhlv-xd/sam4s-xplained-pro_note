@@ -1,0 +1,6 @@
+## build dir
+*/Debug/
+*/Release/
+*.atsuo
+*.o
+*.pyc

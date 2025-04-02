@@ -1,6 +1,6 @@
 ## build dir
-*/Debug/
-*/Release/
+application/application/Debug
+application/application/Release
 *.atsuo
 *.o
 *.pyc

@@ -56,6 +56,9 @@
 #include <compiler.h>
 #include <status_codes.h>
 
+// From module: Delay routines
+#include <delay.h>
+
 // From module: GPIO - General purpose Input/Output
 #include <gpio.h>
 
@@ -83,6 +86,15 @@
 
 // From module: System Clock Control - SAM4S implementation
 #include <sysclk.h>
+
+// From module: UART - Univ. Async Rec/Trans
+#include <uart.h>
+
+// From module: USART - Serial interface - SAM implementation for devices with both UART and USART
+#include <serial.h>
+
+// From module: USART - Univ. Syn Async Rec/Trans
+#include <usart.h>
 
 // From module: WDT - Watchdog Timer
 #include <wdt.h>

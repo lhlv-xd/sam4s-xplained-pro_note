@@ -553,10 +553,16 @@
     <Compile Include="workspace\shell\inc\yysh_customization_cmds.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="workspace\shell\inc\yysh_memory_cmds.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="workspace\shell\inc\yy_shell_interface.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\shell\src\yysh_customization_cmds.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\shell\src\yysh_memory_cmds.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\shell\src\yy_shell_interface.c">

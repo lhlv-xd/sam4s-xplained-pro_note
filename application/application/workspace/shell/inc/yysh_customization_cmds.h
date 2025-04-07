@@ -9,9 +9,12 @@
 #ifndef YYSH_CUSTOMIZATION_CMDS_H_
 #define YYSH_CUSTOMIZATION_CMDS_H_
 
+#include <asf.h>
 #include <stdint.h>
 #include <string.h>
 #include "yy_shell_interface.h"
+/* Customized Include */
+#include "yysh_memory_cmds.h"
 
 /* Structure */
 struct cmd {

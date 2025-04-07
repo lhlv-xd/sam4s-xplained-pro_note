@@ -1,0 +1,40 @@
+﻿/*
+ * yysh_customization_cmds.h
+ *
+ * Created: 2025/4/7 下午 02:02:04
+ *  Author: Yuyi_Chen
+ */ 
+
+
+#ifndef YYSH_CUSTOMIZATION_CMDS_H_
+#define YYSH_CUSTOMIZATION_CMDS_H_
+
+#include <stdint.h>
+#include <string.h>
+#include "yy_shell_interface.h"
+
+/* Structure */
+struct cmd {
+	char *name;
+	void (*func)(void* data);
+};
+
+
+/* Macro */
+
+
+/* Extern */
+extern struct cmd cmds[];
+
+
+/* Prototype */
+uint32_t yysh_cmds_size();
+void yysh_help(void* data);
+// Customized command
+
+
+
+
+
+
+#endif /* YYSH_CUSTOMIZATION_CMDS_H_ */

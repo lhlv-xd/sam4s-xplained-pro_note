@@ -47,6 +47,9 @@ int main (void)
 	printf("------- Start -------\r\n");
 
 	while(1) {
-		
+		if (exec_shell_command) {
+			exec_shell_command = 0;
+			yysh_exec(shellbuf);
+		}
 	}
 }

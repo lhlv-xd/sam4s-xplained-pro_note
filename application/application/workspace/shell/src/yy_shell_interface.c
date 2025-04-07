@@ -7,7 +7,9 @@
 
 #include <asf.h>
 #include <string.h>
+#include <stdlib.h>
 #include "yy_shell_interface.h"
+#include "yysh_customization_cmds.h"
 #include "yy_uart_api.h"
 
 
@@ -15,7 +17,7 @@
 volatile uint8_t shellbuf[SHELLBUF_SIZE];
 static uint8_t shellbuf_index = 0;
 
-
+volatile uint8_t exec_shell_command = 0;
 
 
 /** 
@@ -68,9 +70,10 @@ void UART1_Handler()
 			shellbuf_index = 0;
 			
 			/* Finish */
-			SHELL_PRINTF("\r\nFinish: %s", shellbuf);
-			SHELL_PRINTF("\r\nlen: %d\r\n", strlen(shellbuf));
-			SHELL_PRINTF(SHELL_PROMPT);
+			exec_shell_command = 1;
+			SHELL_PRINTF("\r\n");
+			SHELL_DEBUG(0, "\r\nFinish: %s", shellbuf);
+			SHELL_DEBUG(0, "\r\nlen: %d\r\n", strlen(shellbuf));
 			
 			return;
 		}
@@ -96,3 +99,72 @@ void UART1_Handler()
 
 
 }
+
+
+/** 
+ * @brief split commands to tokens 
+ * @param[in] command_line This is input from shell.
+ */
+uint8_t** yysh_split_line(uint8_t* command_line)
+{
+	/* Declare */
+	uint8_t cmd_buf[SHELLBUF_SIZE];
+	const char* delimiter = " \t\r\n";
+	char* substr;
+	uint8_t tokens_index = 0;
+	
+	/* Split */
+	strcpy(cmd_buf, command_line);
+	substr = strtok(cmd_buf, delimiter);
+	
+	do {
+		strcpy(tokens[tokens_index++], substr);
+		substr = strtok(NULL, delimiter);
+	} while(substr);
+	
+
+	return tokens;
+}
+
+/** 
+ * @brief Clear tokens to '\0'
+ */
+void yysh_clear_tokens()
+{
+	for(uint8_t i = 0; i < TOKEN_NUMS; i++)
+	{
+		for(uint8_t j = 0; j < TOKEN_CMD_SIZE; j++)
+		{
+			tokens[i][j] = '\0';
+		}
+	}
+	
+}
+
+
+/** 
+ * @brief Processing shell commands
+ * @param[in] command_line This is input from shell.
+ */
+void yysh_exec(uint8_t* command_line)
+{
+	SHELL_DEBUG(0, "[in %s function] \r\n", __FUNCTION__);
+	
+	/* split command line to tokens  */
+	yysh_split_line(command_line);
+	
+	/* Execution tokens */
+	for (uint32_t i = 0; i < yysh_cmds_size(); i++) {
+		if (strcmp(tokens[0], cmds[i].name) == 0) {
+			cmds[i].func(NULL);
+			
+			/* Clear tokens */
+			yysh_clear_tokens();
+		}
+	}
+	/* Show Prompt */
+	SHELL_PRINTF(SHELL_PROMPT);
+}
+
+
+

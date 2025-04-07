@@ -10,6 +10,7 @@
 #define YY_PERIPHERAL_INIT_H_
 /* include */
 #include "yy_uart_api.h"
+#include "yy_flash_api.h"
 
 /* Prototype */
 void yy_peripheral_init();

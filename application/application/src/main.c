@@ -35,14 +35,18 @@
 #include "yy_peripheral_init.h"
 #include "yy_shell_interface.h"
 
+
 int main (void)
 {
 	/* Initialize */
 	board_init();
 	yy_peripheral_init();
 	yy_shell_init();
-
 	
+	/* Test */
+	printf("------- Test -------\r\n");
+	//test_flash_api();
+
 	/* Start */
 	printf("------- Start -------\r\n");
 

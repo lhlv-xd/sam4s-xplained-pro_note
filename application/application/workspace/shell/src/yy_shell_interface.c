@@ -198,7 +198,20 @@ void UART1_Handler()
 			return;
 		}
 		
-		
+		/* Tab */
+		if (received_data == 0x09) {
+			for (uint32_t i = 0; i < yysh_cmds_size(); i++) {
+				if (strncmp(cmds[i].name, shellbuf, shellbuf_index) == 0) {
+					strcpy(shellbuf, cmds[i].name);
+					shellbuf_index = strlen(cmds[i].name);
+					
+					//show
+					clear_shell_message();
+					SHELL_PRINTF("%s", shellbuf);
+				}
+			}
+			return;
+		}
 		
 		
 		/* Show Character */

@@ -12,13 +12,18 @@
 #include "yysh_customization_cmds.h"
 #include "yy_uart_api.h"
 
-
-/* Variable  */
+/* Extern Variable */
+volatile uint8_t tokens[TOKEN_NUMS][TOKEN_CMD_SIZE];
 volatile uint8_t shellbuf[SHELLBUF_SIZE];
-static uint8_t shellbuf_index = 0;
-
 volatile uint8_t exec_shell_command = 0;
 
+/* Variable  */
+static uint8_t shellbuf_index = 0;
+
+
+
+/* static */
+static uint8_t is_esc = 0;
 
 /** 
  * @brief Init shell
@@ -62,7 +67,6 @@ void UART1_Handler()
 				return;
 			}
 			
-			
 			/* Deal with shellbuf */
 			shellbuf[shellbuf_index] = '\0';
 			
@@ -89,9 +93,41 @@ void UART1_Handler()
 			return;
 		}
 		
+		/* ESC */
+		if (received_data == 0x1b || is_esc) {
+			is_esc = 1;	
+			if (received_data != 0x1b) {
+				is_esc = 0;
+			}
+			
+			switch (received_data) {
+				case 0x5b: // ASCII: [
+					is_esc = 1;
+					break;
+				/* PgUp */
+				case 0x41:
+					SHELL_DEBUG(0, "Up,");;
+					break;
+				/* Left */
+				case 0x44:
+				SHELL_DEBUG(0, "Left,");
+				break;
+				/* Right */
+				case 0x43:
+				SHELL_DEBUG(0, "Right,");
+				break;	
+				default:
+					break;
+			}
+
+			return;
+		}
+		
+		
+		
+		
 		/* Show Character */
 		SHELL_PRINTF("%c", received_data);
-		
 		/* Add character to shellbuf */
 		shellbuf[shellbuf_index++] = received_data;
 

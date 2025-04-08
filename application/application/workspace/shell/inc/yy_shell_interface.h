@@ -27,9 +27,10 @@
 
 #define TOKEN_NUMS 8
 #define TOKEN_CMD_SIZE 20
-volatile uint8_t tokens[TOKEN_NUMS][TOKEN_CMD_SIZE];
+
 
 /* Extern */
+extern volatile uint8_t tokens[TOKEN_NUMS][TOKEN_CMD_SIZE];
 extern volatile uint8_t exec_shell_command;
 extern volatile uint8_t shellbuf[SHELLBUF_SIZE];
 

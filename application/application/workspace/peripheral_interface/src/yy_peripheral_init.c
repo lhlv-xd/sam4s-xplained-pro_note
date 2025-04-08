@@ -12,6 +12,9 @@
 void yy_peripheral_init()
 {
 	sysclk_init();
+	/* Systick Init */
+	yy_systick_init();
+	
 	/* Uart Init */
 	yy_uart_init();
 }

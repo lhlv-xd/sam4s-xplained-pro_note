@@ -560,6 +560,12 @@
     <Compile Include="src\ASF\sam\drivers\efc\efc.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="workspace\peripheral_interface\inc\yy_systick_api.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\peripheral_interface\src\yy_systick_api.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="workspace\sys\inc\yy_relocate.h">
       <SubType>compile</SubType>
     </Compile>

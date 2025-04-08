@@ -11,6 +11,7 @@
 /* include */
 #include "yy_uart_api.h"
 #include "yy_flash_api.h"
+#include "yy_systick_api.h"
 
 /* Prototype */
 void yy_peripheral_init();

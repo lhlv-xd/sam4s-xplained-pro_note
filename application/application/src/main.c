@@ -45,6 +45,7 @@ int main (void)
 	
 	/* Test */
 	//test_flash_api();
+	test_systick_api();
 
 	/* Start */
 	printf("------- Start -------\r\n");

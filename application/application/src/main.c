@@ -34,7 +34,7 @@
 #include <asf.h>
 #include "yy_peripheral_init.h"
 #include "yy_shell_interface.h"
-
+#include "yy_relocate.h"
 
 int main (void)
 {
@@ -44,7 +44,6 @@ int main (void)
 	yy_shell_init();
 	
 	/* Test */
-	printf("------- Test -------\r\n");
 	//test_flash_api();
 
 	/* Start */

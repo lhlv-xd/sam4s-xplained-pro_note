@@ -13,8 +13,10 @@ int _write(int file, char *data, int len)
 {
 #if ENABLE_UART1
 	usart_serial_write_packet(USART_SERIAL1, data, len);
+	__DSB();
 #else
 	usart_serial_write_packet(USART_SERIAL0, data, len);
+	__DSB();
 #endif
 	return 0;
 }

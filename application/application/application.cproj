@@ -403,6 +403,7 @@
       <Value>../workspace/shell/inc</Value>
       <Value>../src/ASF/sam/drivers/efc</Value>
       <Value>../src/ASF/sam/services/flash_efc</Value>
+      <Value>../workspace/sys/inc</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -552,10 +553,17 @@
     <Folder Include="workspace\peripheral_interface" />
     <Folder Include="workspace\peripheral_interface\inc" />
     <Folder Include="workspace\peripheral_interface\src" />
+    <Folder Include="workspace\sys\inc" />
     <Folder Include="workspace\sys\src" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\ASF\sam\drivers\efc\efc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\sys\inc\yy_relocate.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\sys\src\yy_relocate.c">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\ASF\sam\drivers\efc\efc.h">

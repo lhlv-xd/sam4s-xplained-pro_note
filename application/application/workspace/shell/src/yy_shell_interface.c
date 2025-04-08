@@ -18,12 +18,16 @@ volatile uint8_t shellbuf[SHELLBUF_SIZE];
 volatile uint8_t exec_shell_command = 0;
 
 /* Variable  */
+uint8_t historybuf[HISTORY_NUMS][SHELLBUF_SIZE];
+static uint8_t history_index = 0;
+
 static uint8_t shellbuf_index = 0;
 
 
 
 /* static */
 static uint8_t is_esc = 0;
+static int8_t hist_get_index = -1;
 
 /** 
  * @brief Init shell
@@ -48,6 +52,56 @@ void yy_shell_deinit()
 	uart_disable_interrupt(USART_SERIAL1, UART_IER_RXRDY);
 }
 
+/** 
+ * @brief Set history command to historybuf
+ */
+void set_history(uint8_t* content)
+{
+	strcpy(historybuf[history_index++], content);
+	if (history_index >= HISTORY_NUMS) {
+		history_index = 0;
+	}
+}
+
+/** 
+ * @brief Get history command
+ */
+void get_history(uint8_t* recvbuf, ARROW_KEYS_E mode)
+{
+	if (hist_get_index == -1) {
+		hist_get_index = history_index;
+	}
+	
+	int8_t _hist_index;
+	if (mode == PgUp) {
+		_hist_index = (hist_get_index == 0) ? (HISTORY_NUMS - 1) : (hist_get_index - 1);
+		
+	}
+	else {
+		_hist_index = (hist_get_index == HISTORY_NUMS) ? (0) : (hist_get_index + 1);
+	}
+	
+	// if around
+	if (_hist_index != history_index) {
+		hist_get_index = _hist_index;
+	}
+	
+	strcpy(recvbuf, historybuf[hist_get_index]);
+}
+
+/** 
+ * @brief Clear shell output message
+ */
+void clear_shell_message()
+{
+	SHELL_PRINTF("\r");
+	uint32_t size = strlen(shellbuf) + strlen(SHELL_PROMPT);
+	size = (size > SHELLBUF_SIZE) ? SHELLBUF_SIZE : size;
+	for (uint32_t i = 0; i < size; i++) {
+		SHELL_PRINTF(" ");
+	}
+	SHELL_PRINTF("\r"SHELL_SIGN" ");
+}
 
 void UART1_Handler()
 {
@@ -72,6 +126,7 @@ void UART1_Handler()
 			
 			/* Reset parameters */
 			shellbuf_index = 0;
+			hist_get_index = -1;
 			
 			/* Finish */
 			exec_shell_command = 1;
@@ -79,6 +134,8 @@ void UART1_Handler()
 			SHELL_DEBUG(0, "\r\nFinish: %s", shellbuf);
 			SHELL_DEBUG(0, "\r\nlen: %d\r\n", strlen(shellbuf));
 			
+			/* Record History */
+			set_history(shellbuf);
 			return;
 		}
 		
@@ -106,16 +163,34 @@ void UART1_Handler()
 					break;
 				/* PgUp */
 				case 0x41:
-					SHELL_DEBUG(0, "Up,");;
+					SHELL_DEBUG(0, "Up,");
+					clear_shell_message();
+					
+					get_history(shellbuf, PgUp);
+					shellbuf_index = strlen(shellbuf);
+					shellbuf[shellbuf_index] = '\0';
+					
+					SHELL_PRINTF("%s", shellbuf);
 					break;
+				/* PgDn */
+				case 0x42:
+					SHELL_DEBUG(0, "Down,");
+					clear_shell_message();
+					
+					get_history(shellbuf, PgDn);
+					shellbuf_index = strlen(shellbuf);
+					shellbuf[shellbuf_index] = '\0';
+					
+					SHELL_PRINTF("%s", shellbuf);
+					break;	
 				/* Left */
 				case 0x44:
-				SHELL_DEBUG(0, "Left,");
-				break;
+					SHELL_DEBUG(0, "Left,");
+					break;
 				/* Right */
 				case 0x43:
-				SHELL_DEBUG(0, "Right,");
-				break;	
+					SHELL_DEBUG(0, "Right,");
+					break;	
 				default:
 					break;
 			}
@@ -196,10 +271,14 @@ void yysh_exec(uint8_t* command_line)
 			
 			/* Clear tokens */
 			yysh_clear_tokens();
+			
+			/* Show Prompt */
+			SHELL_PRINTF(SHELL_PROMPT);
+			return;
 		}
 	}
 	/* Show Prompt */
-	SHELL_PRINTF(SHELL_PROMPT);
+	SHELL_PRINTF("\r"SHELL_SIGN" ");
 }
 
 

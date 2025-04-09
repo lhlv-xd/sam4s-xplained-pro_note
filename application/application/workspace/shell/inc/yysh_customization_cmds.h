@@ -31,6 +31,8 @@ extern struct cmd cmds[];
 
 
 /* Prototype */
+uint8_t yysh_getvalue8(const char* value);
+uint32_t yysh_getvalue32(const char* value);
 uint32_t yysh_cmds_size();
 void yysh_help(void* data);
 // Customized command

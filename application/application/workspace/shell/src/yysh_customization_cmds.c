@@ -41,4 +41,30 @@ uint32_t yysh_cmds_size()
 	return sizeof(cmds) / sizeof(struct cmd);
 }
 
+/*
+ * @brief convert string to uint8_t
+ * @note if string include 0x, the result of uint8_t is hexadecimal, or it is decimal.
+ */
+uint8_t yysh_getvalue8(const char* value)
+{
+	uint8_t ret_value;
+	char* endptr;
+	ret_value =(strncmp(value, "0x", 2) == 0) ?  strtol(value, &endptr, 16) : strtol(value, &endptr, 10);
+	
+	SHELL_DEBUG(0, "yysh_getvalue8: %d\r\n", ret_value);
+	return ret_value;
+}
 
+/*
+ * @brief convert string to uint32_t
+ * @note if string include 0x, the result of uint8_t is hexadecimal, or it is decimal.
+ */
+uint32_t yysh_getvalue32(const char* value)
+{
+	uint32_t ret_value;
+	char* endptr; 
+	ret_value =(strncmp(value, "0x", 2) == 0) ?  strtol(value, &endptr, 16) : strtol(value, &endptr, 10);
+	
+	SHELL_DEBUG(0, "yysh_getvalue32: 0x%x\r\n", ret_value);
+	return ret_value;
+}

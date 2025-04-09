@@ -22,9 +22,9 @@ void yysh_read_memory(void * data)
 	uint8_t recvBuf[1024];
 	uint32_t addr, size;
 	char* endptr;
-	addr = strtol(tokens[1], &endptr, 16);
-	size = strtol(tokens[2], &endptr, 10);
-		
+	addr = yysh_getvalue32(tokens[1]);
+	size = yysh_getvalue32(tokens[2]);
+	
 	uint32_t start = (addr ) & ~(0xf);
 	uint32_t total_size = (((addr + size) + 0xf) & ~(0xf)) - start;
 	total_size = (total_size > 1024) ? 1024 : total_size;
@@ -69,10 +69,10 @@ void yysh_erase_flash(void * data)
 		return;
 	}
 	
-	uint32_t addr, mode;
-	char* endptr;
-	addr = strtol(tokens[1], &endptr, 16);
-	mode = strtol(tokens[2], &endptr, 10);
+	uint32_t addr;
+	uint8_t mode;
+	addr = yysh_getvalue32(tokens[1]);
+	mode = yysh_getvalue8(tokens[2]);
 	
 	uint32_t status;
 	status = yy_flash_erase(addr, mode);
@@ -93,10 +93,8 @@ void yysh_write_flash(void* data)
 	
 	uint32_t addr;
 	uint8_t value;
-	char* endptr;
-	addr = strtol(tokens[1], &endptr, 16);
-	// Regardless of the input format, it is hexadecimal. 
-	value =  (strncmp(tokens[1], "0x", 2) == 0) ? strtol(tokens[2], &endptr, 16) : strtol(tokens[2], &endptr, 10);
+	addr = yysh_getvalue32(tokens[1]);
+	value = yysh_getvalue8(tokens[2]);
 	
 	uint32_t status;
 	status = yy_flash_write(addr, &value, 1, ERASED_PAGES_8);

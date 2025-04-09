@@ -18,7 +18,9 @@ void yysh_help(void* data)
 	const char help_msg[] =
 	"yysh  Yuyi's Shell. \r\n"
 	"  help                                           Print this help message.\r\n"
-	"  memread <address> <size>                       Read MCU register.\r\n";
+	"  memread <address> <size>                       Read MCU register.\r\n"
+	"  flasherase <address> <mode>                    Erase mcu flash.\r\n"
+	"  flashwrite <address> <value>                   Write mcu flash.\r\n";
 	
 	SHELL_PRINTF(help_msg);
 }
@@ -26,7 +28,9 @@ void yysh_help(void* data)
 /* Add your customized callback function to this */
 struct cmd cmds[] = {
 	{"help",           yysh_help       },
-	{"memread",        yysh_read_memory}
+	{"memread",        yysh_read_memory},
+	{"flasherase",       yysh_erase_flash},
+	{"flashwrite",       yysh_write_flash}
 };
 
 /*

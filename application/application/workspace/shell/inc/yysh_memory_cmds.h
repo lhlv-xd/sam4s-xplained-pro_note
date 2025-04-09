@@ -11,6 +11,9 @@
 
 /* Prototype */
 void yysh_read_memory(void * data);
+void yysh_erase_flash(void * data);
+void yysh_write_flash(void* data);
+
 
 
 

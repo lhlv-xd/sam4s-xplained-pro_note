@@ -56,3 +56,50 @@ void yysh_read_memory(void * data)
 		SHELL_PRINTF("\r\n  ");
 	}
 }
+
+/*
+ * @brief erase flash
+ *        Usage: > flasherase <address> <mode>
+ *        (mode can refer to the following : FLASH_ERADED_MODE_E)
+ */
+void yysh_erase_flash(void * data)
+{
+	/* format is incorrect */
+	if (tokens[2][0] == '\0' || strncmp(tokens[1], "0x", 2) != 0) {
+		return;
+	}
+	
+	uint32_t addr, mode;
+	char* endptr;
+	addr = strtol(tokens[1], &endptr, 16);
+	mode = strtol(tokens[2], &endptr, 10);
+	
+	uint32_t status;
+	status = yy_flash_erase(addr, mode);
+	SHELL_PRINTF("status: %d\r\n", status);
+	
+}
+
+/*
+ * @brief write data to flash
+ *        Usage: > flashwrite <address> <value>
+ */
+void yysh_write_flash(void* data)
+{
+	/* format is incorrect */
+	if (tokens[2][0] == '\0' || strncmp(tokens[1], "0x", 2) != 0) {
+		return;
+	}
+	
+	uint32_t addr;
+	uint8_t value;
+	char* endptr;
+	addr = strtol(tokens[1], &endptr, 16);
+	// Regardless of the input format, it is hexadecimal. 
+	value =  (strncmp(tokens[1], "0x", 2) == 0) ? strtol(tokens[2], &endptr, 16) : strtol(tokens[2], &endptr, 10);
+	
+	uint32_t status;
+	status = yy_flash_write(addr, &value, 1, ERASED_PAGES_8);
+	SHELL_PRINTF("status: %d\r\n", status);
+	
+}

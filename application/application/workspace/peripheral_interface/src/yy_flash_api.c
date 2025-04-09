@@ -98,29 +98,31 @@ uint32_t yy_flash_write(uint32_t addr, uint8_t* data_ptr, uint32_t data_size, FL
 	}
 	
 	/* Erase */
-	switch (mode) {
-		case ERASED_PAGES_4:
-		case ERASED_PAGES_8:
-		case ERASED_PAGES_16:
-		case ERASED_PAGES_32:
-			status = flash_erase_page(addr, mode);
-			break;
-		case ERASED_SECTOR:
-			status = flash_erase_sector(addr);
-			break;
-		case ERASED_BANK:
-			if (addr < 0x500000) {
+	if (addr % total_size == 0) {
+		switch (mode) {
+			case ERASED_PAGES_4:
+			case ERASED_PAGES_8:
+			case ERASED_PAGES_16:
+			case ERASED_PAGES_32:
+				status = flash_erase_page(addr, mode);
+				break;
+			case ERASED_SECTOR:
+				status = flash_erase_sector(addr);
+				break;
+			case ERASED_BANK:
+				if (addr < 0x500000) {
+					return FLASH_RC_INVALID;
+				}
+				status = flash_erase_all(addr);
+				break;
+			default:
 				return FLASH_RC_INVALID;
-			}
-			status = flash_erase_all(addr);
 			break;
-		default:
-			return FLASH_RC_INVALID;
-		break;
 		
-	}
-	if (status != FLASH_RC_OK) {
-		return status;
+		}
+		if (status != FLASH_RC_OK) {
+			return status;
+		}
 	}
 	
 	/* Write */

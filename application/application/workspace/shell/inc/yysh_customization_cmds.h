@@ -15,6 +15,7 @@
 #include "yy_shell_interface.h"
 /* Customized Include */
 #include "yysh_memory_cmds.h"
+#include "yysh_information.h"
 
 /* Structure */
 struct cmd {

@@ -20,17 +20,19 @@ void yysh_help(void* data)
 	"  help                                           Print this help message.\r\n"
 	"  memread <address> <size>                       Read MCU register.\r\n"
 	"  flasherase <address> <mode>                    Erase mcu flash.\r\n"
-	"  flashwrite <address> <value>                   Write mcu flash.\r\n";
+	"  flashwrite <address> <value>                   Write mcu flash.\r\n"
+	"  show_linker                                    Show linker address.\r\n";
 	
 	SHELL_PRINTF(help_msg);
 }
 
 /* Add your customized callback function to this */
 struct cmd cmds[] = {
-	{"help",           yysh_help       },
-	{"memread",        yysh_read_memory},
-	{"flasherase",       yysh_erase_flash},
-	{"flashwrite",       yysh_write_flash}
+	{"help",             yysh_help               },
+	{"memread",          yysh_read_memory        },
+	{"flasherase",       yysh_erase_flash        },
+	{"flashwrite",       yysh_write_flash        },
+	{"show_linker",      yysh_show_linker_address}
 };
 
 /*

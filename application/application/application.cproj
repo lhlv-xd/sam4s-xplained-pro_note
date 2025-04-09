@@ -566,6 +566,12 @@
     <Compile Include="workspace\peripheral_interface\src\yy_systick_api.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="workspace\shell\inc\yysh_information.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\shell\src\yysh_information.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="workspace\sys\inc\yy_relocate.h">
       <SubType>compile</SubType>
     </Compile>

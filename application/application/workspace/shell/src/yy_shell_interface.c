@@ -35,11 +35,11 @@ static int8_t hist_get_index = -1;
 void yy_shell_init()
 {
 	/* Rx Interrupt */
-	NVIC_DisableIRQ(UART1_IRQn);
-	NVIC_ClearPendingIRQ(UART1_IRQn);
-	NVIC_SetPriority(UART1_IRQn, 1);
-	NVIC_EnableIRQ(UART1_IRQn);
-	uart_enable_interrupt(USART_SERIAL1, UART_IER_RXRDY);
+	NVIC_DisableIRQ(SHELL_IRQ);
+	NVIC_ClearPendingIRQ(SHELL_IRQ);
+	NVIC_SetPriority(SHELL_IRQ, 1);
+	NVIC_EnableIRQ(SHELL_IRQ);
+	uart_enable_interrupt(SHELL_INTERFACE, UART_IER_RXRDY);
 }
 
 /** 
@@ -47,9 +47,9 @@ void yy_shell_init()
  */
 void yy_shell_deinit()
 {
-	NVIC_DisableIRQ(UART1_IRQn);
-	NVIC_ClearPendingIRQ(UART1_IRQn);
-	uart_disable_interrupt(USART_SERIAL1, UART_IER_RXRDY);
+	NVIC_DisableIRQ(SHELL_IRQ);
+	NVIC_ClearPendingIRQ(SHELL_IRQ);
+	uart_disable_interrupt(SHELL_INTERFACE, UART_IER_RXRDY);
 }
 
 /** 
@@ -103,15 +103,15 @@ void clear_shell_message()
 	SHELL_PRINTF("\r"SHELL_SIGN" ");
 }
 
-void UART1_Handler()
+void SHELL_HANDLER()
 {
-	uint32_t status = uart_get_status(UART1);
+	uint32_t status = uart_get_status(SHELL_INTERFACE);
 	uint8_t received_data;
 	//show("status: 0x%x\r\n", status);
 
 	if (status & UART_IER_RXRDY) {
-		received_data = (uint8_t) UART1->UART_RHR;
-		uart_reset_status(UART1);
+		received_data = (uint8_t) SHELL_INTERFACE->UART_RHR;
+		uart_reset_status(SHELL_INTERFACE);
 
 		
 		if (received_data == '\r' || received_data == '\n') {

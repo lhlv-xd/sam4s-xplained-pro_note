@@ -20,6 +20,11 @@
 #define SHELLBUF_SIZE 128
 #define SHELL_SIGN   ">"
 #define SHELL_PROMPT "\r\n"SHELL_SIGN" "
+
+#define SHELL_INTERFACE USART_SERIAL1
+#define SHELL_IRQ UART1_IRQn
+#define SHELL_HANDLER UART1_Handler
+
 #define SHELL_PRINTF(format, ...) yy_show(format, ##__VA_ARGS__)
 #define SHELL_DEBUG(debug, format, ...) { \
 	if (debug > 0) { \

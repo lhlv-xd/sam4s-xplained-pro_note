@@ -9,7 +9,7 @@
 #include "yysh_information.h"
 #include "yysh_customization_cmds.h"
 
-extern uint32_t _sfixed, _efixed, _etext, _srelocate, _erelocate, _sbss, _ebss, _sstack, _estack;
+extern uint32_t _sfixed, _efixed, _etext, _srelocate, _erelocate, _sbss, _ebss, _sstack, _estack, __ram_end__, _end;
 
 void yysh_show_linker_address(void *data)
 {
@@ -32,6 +32,11 @@ void yysh_show_linker_address(void *data)
 	SHELL_PRINTF(".stack\r\n");
 	SHELL_PRINTF("\t_sstack: 0x%x\r\n", &_sstack);
 	SHELL_PRINTF("\t_estack: 0x%x\r\n", &_estack);
+	
+	/* .heap */
+	SHELL_PRINTF(".heap\r\n");
+	SHELL_PRINTF("\t_end: 0x%x\r\n", &_end);
+	SHELL_PRINTF("\t__ram_end__: 0x%x\r\n", &__ram_end__);
 	
 	/* other */
 	SHELL_PRINTF("others\r\n");

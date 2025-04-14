@@ -113,7 +113,24 @@ void SHELL_HANDLER()
 		received_data = (uint8_t) SHELL_INTERFACE->UART_RHR;
 		uart_reset_status(SHELL_INTERFACE);
 
-		
+		/* Xmodem */
+		if (is_xmodem) {
+			xmodembuf[xmodembuf_index++] = received_data;
+			xmodem_mode = XMODEM_RECV_DATA;
+			if (xmodembuf_index == 133) {
+				xmodem_mode = XMODEM_RECV_OK;
+				
+				/* reset */
+				xmodembuf_index = 0;
+			}
+			
+			if (xmodembuf[0] == 0x04) {
+				xmodem_mode = XMODEM_EOT;
+			}
+			return;
+		}
+
+		/* Execute Command */
 		if (received_data == '\r' || received_data == '\n') {
 			/* No command, show prompt */
 			if (shellbuf_index == 0) {

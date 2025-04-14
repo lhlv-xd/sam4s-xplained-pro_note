@@ -115,6 +115,9 @@ uint32_t yy_flash_write(uint32_t addr, uint8_t* data_ptr, uint32_t data_size, FL
 				}
 				status = flash_erase_all(addr);
 				break;
+			case ERADED_SKIP:
+				status = FLASH_RC_OK;
+				break;
 			default:
 				return FLASH_RC_INVALID;
 			break;

@@ -22,6 +22,8 @@ typedef enum {
 	ERASED_SECTOR,
 	/* a bank to be erased */
 	ERASED_BANK,
+	/* skip erase */
+	ERADED_SKIP,
 	/* Parameter is not support */
 	ERASDE_PAGES_INVALID,
 }FLASH_ERADED_MODE_E;

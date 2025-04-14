@@ -29,6 +29,7 @@ extern volatile XMODEM_MODE xmodem_mode;
 
 /* Prototype */
 void yysh_xmodem_update(void *data);
+void yysh_relocate(void* data);
 
 
 #endif /* YYSH_XMODEM_CMDS_H_ */

@@ -6,7 +6,7 @@
  */ 
 
 #include "yysh_xmodem_cmds.h"
-
+#include "yy_relocate.h"
 
 /* Extern */
 volatile uint8_t is_xmodem = 0;
@@ -93,6 +93,23 @@ void yysh_xmodem_update(void *data)
 	
 	/* End */
 	is_xmodem = 0;
+}
+
+/** 
+ * @brief Jump to other firmware
+ */
+void yysh_relocate(void* data)
+{
+	/* format is incorrect */
+	if (tokens[1][0] == '\0' || strncmp(tokens[1], "0x", 2) != 0) {
+		return;
+	}
+	uint32_t addr = yysh_getvalue32(tokens[1]);
+	
+	SHELL_PRINTF("Jump to 0x%x...\r\n", addr);
+	yy_jump_to_exe(addr);
+	
+	for(;;);
 }
 
 

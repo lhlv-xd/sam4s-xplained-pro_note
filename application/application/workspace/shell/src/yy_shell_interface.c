@@ -213,11 +213,20 @@ void SHELL_HANDLER()
 			return;
 		}
 		
+		/* Check Size if bigger than SHELLBUF_SIZE */
+		if (shellbuf_index >= SHELLBUF_SIZE - 1) {
+			SHELL_DEBUG(0, "Exceeds the character limit\r\n");
+			return;
+		}
+		
 		
 		/* Show Character */
 		SHELL_PRINTF("%c", received_data);
+		
 		/* Add character to shellbuf */
 		shellbuf[shellbuf_index++] = received_data;
+		
+		
 
 	}
 

@@ -48,6 +48,7 @@ int main (void)
 	//test_systick_api();
 
 	/* Start */
+	yy_check_reset_reason();
 	yy_show("\r\n------- Start -------\r\n");
 
 	while(1) {

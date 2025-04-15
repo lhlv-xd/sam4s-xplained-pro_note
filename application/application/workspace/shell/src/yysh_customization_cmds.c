@@ -20,6 +20,7 @@ void yysh_help(void* data)
 	"  help                                           Print this help message.\r\n"
 	"  clear                                          Clear screen.\r\n"
 	"  memread <address> <size>                       Read MCU register.\r\n"
+	"  memwrite <address> <value>                     Write MCU register.\r\n"
 	"  flasherase <address> <mode>                    Erase mcu flash.\r\n"
 	"  flashwrite <address> <value>                   Write mcu flash.\r\n"
 	"  show_linker                                    Show linker address.\r\n"
@@ -34,6 +35,7 @@ struct cmd cmds[] = {
 	{"help",             yysh_help               },
 	{"clear",            yysh_clear              },
 	{"memread",          yysh_read_memory        },
+	{"memwrite",         yysh_write_memory       },
 	{"flasherase",       yysh_erase_flash        },
 	{"flashwrite",       yysh_write_flash        },
 	{"show_linker",      yysh_show_linker_address},

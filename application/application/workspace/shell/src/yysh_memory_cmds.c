@@ -58,6 +58,28 @@ void yysh_read_memory(void * data)
 }
 
 /*
+ * @brief write data to memory
+ *        Usage: > memwrite <address> <value>
+ */
+void yysh_write_memory(void* data)
+{
+	/* format is incorrect */
+	if (tokens[2][0] == '\0' || strncmp(tokens[1], "0x", 2) != 0) {
+		return;
+	}
+	
+	uint32_t addr;
+	uint8_t value;
+	addr = yysh_getvalue32(tokens[1]);
+	value = yysh_getvalue8(tokens[2]);
+	
+	uint8_t *ptr = (uint8_t *) addr;
+	*ptr = value;
+}
+
+
+
+/*
  * @brief erase flash
  *        Usage: > flasherase <address> <mode>
  *        (mode can refer to the following : FLASH_ERADED_MODE_E)

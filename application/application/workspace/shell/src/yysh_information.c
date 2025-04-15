@@ -42,3 +42,12 @@ void yysh_show_linker_address(void *data)
 	SHELL_PRINTF("others\r\n");
 	SHELL_PRINTF("\t_etext: 0x%x\r\n", &_etext);
 }
+
+
+/*
+ * @brief clear screen
+ */
+void yysh_clear(void* data)
+{
+	SHELL_PRINTF("\x1B[2J\x1B[H");
+}

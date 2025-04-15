@@ -18,6 +18,7 @@ void yysh_help(void* data)
 	const char help_msg[] =
 	"yysh  Yuyi's Shell. \r\n"
 	"  help                                           Print this help message.\r\n"
+	"  reset                                          Reset MCU.\r\n"
 	"  clear                                          Clear screen.\r\n"
 	"  memread <address> <size>                       Read MCU register.\r\n"
 	"  memwrite <address> <value>                     Write MCU register.\r\n"

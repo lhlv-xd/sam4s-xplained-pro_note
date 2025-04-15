@@ -48,7 +48,7 @@ int main (void)
 	//test_systick_api();
 
 	/* Start */
-	printf("------- Start -------\r\n");
+	yy_show("\r\n------- Start -------\r\n");
 
 	while(1) {
 		if (exec_shell_command) {

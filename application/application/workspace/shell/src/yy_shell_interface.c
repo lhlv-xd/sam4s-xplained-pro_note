@@ -153,6 +153,14 @@ void SHELL_HANDLER()
 			
 			/* Record History */
 			set_history(shellbuf);
+			
+			// reset mcu
+			if (strcmp(shellbuf, "reset") == 0) {
+				// reset (HAL)
+				RSTC->RSTC_CR = RSTC_CR_KEY_PASSWD | RSTC_CR_PROCRST | RSTC_CR_PERRST;
+				while (1); // Wait for the reset to happen
+			}
+			
 			return;
 		}
 		

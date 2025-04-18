@@ -123,3 +123,77 @@ void yysh_write_flash(void* data)
 	SHELL_PRINTF("status: %d\r\n", status);
 	
 }
+
+
+/* 
+ * @brief Unlock specific flash region.
+ * @note The minimum lock size is 8k and need to be aligned to 8K
+ */
+void yysh_unlock_flash(void* data)
+{
+	/* format is incorrect */
+	if (tokens[2][0] == '\0' || strncmp(tokens[1], "0x", 2) != 0) {
+		return;
+	}
+	
+	uint32_t addr, total_size;
+	addr = yysh_getvalue32(tokens[1]);
+	total_size = yysh_getvalue32(tokens[2]);
+	
+	
+	/* Declare */
+	uint32_t status;
+	uint32_t pul_actual_start, pul_actual_end;
+	
+	/* Flash Init */
+	status = flash_init(FLASH_ACCESS_MODE_128, 6);
+	SHELL_DEBUG(1, "flash_init status: %d\r\n", status);
+	if (status != FLASH_RC_OK) {
+		return status;
+	}
+	
+	/* Flash Unlock */
+	status = flash_unlock(addr, addr + total_size - 1, &pul_actual_start, &pul_actual_end);
+	SHELL_DEBUG(1, "flash_unlock status: %d\r\n", status);
+	if (status != FLASH_RC_OK) {	
+		return;
+	}
+	
+	SHELL_PRINTF("unlock address: 0x%x to 0x%x\r\n", pul_actual_start, pul_actual_end);
+}
+
+/* 
+ * @brief Lock specific flash region.
+ * @note The minimum lock size is 8k and need to be aligned to 8K
+ */
+void yysh_lock_flash(void* data)
+{
+	/* format is incorrect */
+	if (tokens[2][0] == '\0' || strncmp(tokens[1], "0x", 2) != 0) {
+		return;
+	}
+	
+	uint32_t addr, total_size;
+	addr = yysh_getvalue32(tokens[1]);
+	total_size = yysh_getvalue32(tokens[2]);
+	
+	/* Declare */
+	uint32_t status;
+	uint32_t pul_actual_start, pul_actual_end;
+	
+	/* Flash Init */
+	status = flash_init(FLASH_ACCESS_MODE_128, 6);
+	SHELL_DEBUG(1, "flash_init status: %d\r\n", status);
+	if (status != FLASH_RC_OK) {
+		return status;
+	}
+	
+	/* Flash lock */
+	status = flash_lock(addr, addr + total_size - 1, &pul_actual_start, &pul_actual_end);
+	SHELL_DEBUG(1, "status: %d\r\n", status);
+	if (status != FLASH_RC_OK) {
+		return;
+	}
+	
+	SHELL_PRINTF("lock address: 0x%x to 0x%x\r\n", pul_actual_start, pul_actual_end);
+}

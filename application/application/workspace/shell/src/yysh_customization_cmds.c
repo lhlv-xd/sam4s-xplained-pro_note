@@ -24,6 +24,8 @@ void yysh_help(void* data)
 	"  memwrite <address> <value>                     Write MCU register.\r\n"
 	"  flasherase <address> <mode>                    Erase mcu flash.\r\n"
 	"  flashwrite <address> <value>                   Write mcu flash.\r\n"
+	"  flashunlock <address> <total_size>             Unlock flash.\r\n"
+	"  flashlock <address> <total_size>               Lock flash.\r\n"
 	"  show_linker                                    Show linker address.\r\n"
 	"  xmodem <address>                               FW update by xmodem.\r\n"
 	"  jumpto <address>                               Relocate to new Entry point.\r\n";
@@ -39,6 +41,8 @@ struct cmd cmds[] = {
 	{"memwrite",         yysh_write_memory       },
 	{"flasherase",       yysh_erase_flash        },
 	{"flashwrite",       yysh_write_flash        },
+	{"flashunlock",      yysh_unlock_flash       },
+	{"flashlock",        yysh_lock_flash         },
 	{"show_linker",      yysh_show_linker_address},
 	{"xmodem",           yysh_xmodem_update      },
 	{"jumpto",           yysh_relocate           },

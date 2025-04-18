@@ -14,6 +14,8 @@ void yysh_read_memory(void * data);
 void yysh_write_memory(void* data);
 void yysh_erase_flash(void * data);
 void yysh_write_flash(void* data);
+void yysh_unlock_flash(void* data);
+void yysh_lock_flash(void* data);
 
 
 

@@ -91,14 +91,23 @@ uint32_t yy_flash_write(uint32_t addr, uint8_t* data_ptr, uint32_t data_size, FL
 		total_size = 1024 * 1024; // 1024 kBytes
 	}
 	
-	/* Unlock */
-	status = flash_unlock(addr, addr + total_size - 1, 0, 0);
+	/* Unlock (minimux is 8K) */
+	// If it is less than 8K, it will automatically fill in to multiples of 8K
+	status = flash_unlock(addr, addr + data_size - 1, 0, 0);
 	if (status != FLASH_RC_OK) {
 		return status;
 	}
 	
-	/* Erase */
+	
+	/* Start of erase size */
 	if (addr % total_size == 0) {
+		/* Unlock (Avoid partial erase area not unlocked) */
+		status = flash_unlock(addr, addr + total_size - 1, 0, 0);
+		if (status != FLASH_RC_OK) {
+			return status;
+		}
+		
+		/* Erase */
 		switch (mode) {
 			case ERASED_PAGES_4:
 			case ERASED_PAGES_8:
@@ -134,8 +143,9 @@ uint32_t yy_flash_write(uint32_t addr, uint8_t* data_ptr, uint32_t data_size, FL
 		return status;
 	}
 	
-	/* Lock */
-	status = flash_lock(addr, addr + total_size - 1, 0, 0);
+	/* Lock (minimux is 8K) */
+	// If it is less than 8K, it will automatically fill in to multiples of 8K
+	status = flash_lock(addr, addr + data_size - 1, 0, 0);
 	if (status != FLASH_RC_OK) {
 		return status;
 	}

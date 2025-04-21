@@ -13,6 +13,8 @@
 #include "yy_flash_api.h"
 #include "yy_systick_api.h"
 #include "yy_rstc_api.h"
+#include "yy_i2c_api.h"
+#include "yy_i2c_slave_interrupt.h"
 
 /* Prototype */
 void yy_peripheral_init();

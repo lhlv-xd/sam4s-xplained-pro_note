@@ -36,6 +36,8 @@
     <option id="common.services.basic.gpio" value="Add" config="" content-id="Atmel.ASF" />
     <option id="common.services.ioport" value="Add" config="" content-id="Atmel.ASF" />
     <option id="common.services.basic.serial" value="Add" config="" content-id="Atmel.ASF" />
+    <option id="common.services.basic.twi" value="Add" config="" content-id="Atmel.ASF" />
+    <option id="sam.drivers.matrix" value="Add" config="" content-id="Atmel.ASF" />
     <option id="sam.drivers.pio" value="Add" config="" content-id="Atmel.ASF" />
     <option id="sam.drivers.wdt" value="Add" config="" content-id="Atmel.ASF" />
     <option id="sam.services.flash" value="Add" config="" content-id="Atmel.ASF" />
@@ -218,6 +220,14 @@
     <file path="src/ASF/sam/drivers/efc/efc.h" framework="" version="3.52.0" source="sam\drivers\efc\efc.h" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/sam/services/flash_efc/flash_efc.c" framework="" version="3.52.0" source="sam\services\flash_efc\flash_efc.c" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/sam/services/flash_efc/flash_efc.h" framework="" version="3.52.0" source="sam\services\flash_efc\flash_efc.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/twi/twi_slave.h" framework="" version="3.52.0" source="common\services\twi\twi_slave.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/twi/sam_twi/twi_master.h" framework="" version="3.52.0" source="common\services\twi\sam_twi\twi_master.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/twi/twi_master.h" framework="" version="3.52.0" source="common\services\twi\twi_master.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/twi/sam_twi/twi_slave.h" framework="" version="3.52.0" source="common\services\twi\sam_twi\twi_slave.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/sam/drivers/twi/twi.c" framework="" version="3.52.0" source="sam\drivers\twi\twi.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/sam/drivers/twi/twi.h" framework="" version="3.52.0" source="sam\drivers\twi\twi.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/sam/drivers/matrix/matrix.c" framework="" version="3.52.0" source="sam\drivers\matrix\matrix.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/sam/drivers/matrix/matrix.h" framework="" version="3.52.0" source="sam\drivers\matrix\matrix.h" changed="False" content-id="Atmel.ASF" />
   </files>
   <documentation help="https://asf.microchip.com/docs/3.52.0/common.applications.user_application.xplained_pro.sam4s_xplained_pro/html/index.html" />
   <offline-documentation help="" />
@@ -274,6 +284,9 @@
       <Value>../src/ASF/sam/drivers/usart</Value>
       <Value>../src/ASF/sam/drivers/efc</Value>
       <Value>../src/ASF/sam/services/flash_efc</Value>
+      <Value>../src/ASF/common/services/twi</Value>
+      <Value>../src/ASF/sam/drivers/twi</Value>
+      <Value>../src/ASF/sam/drivers/matrix</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -321,6 +334,9 @@
       <Value>../src/ASF/sam/drivers/usart</Value>
       <Value>../src/ASF/sam/drivers/efc</Value>
       <Value>../src/ASF/sam/services/flash_efc</Value>
+      <Value>../src/ASF/common/services/twi</Value>
+      <Value>../src/ASF/sam/drivers/twi</Value>
+      <Value>../src/ASF/sam/drivers/matrix</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM4=true -DBOARD=SAM4S_XPLAINED_PRO -D__SAM4SD32C__ -Dprintf=iprintf -Dscanf=iscanf</armgcc.preprocessingassembler.general.AssemblerFlags>
@@ -351,6 +367,9 @@
       <Value>../src/ASF/sam/drivers/usart</Value>
       <Value>../src/ASF/sam/drivers/efc</Value>
       <Value>../src/ASF/sam/services/flash_efc</Value>
+      <Value>../src/ASF/common/services/twi</Value>
+      <Value>../src/ASF/sam/drivers/twi</Value>
+      <Value>../src/ASF/sam/drivers/matrix</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -404,6 +423,9 @@
       <Value>../src/ASF/sam/drivers/efc</Value>
       <Value>../src/ASF/sam/services/flash_efc</Value>
       <Value>../workspace/sys/inc</Value>
+      <Value>../src/ASF/common/services/twi</Value>
+      <Value>../src/ASF/sam/drivers/twi</Value>
+      <Value>../src/ASF/sam/drivers/matrix</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -453,6 +475,9 @@
       <Value>../src/ASF/sam/drivers/usart</Value>
       <Value>../src/ASF/sam/drivers/efc</Value>
       <Value>../src/ASF/sam/services/flash_efc</Value>
+      <Value>../src/ASF/common/services/twi</Value>
+      <Value>../src/ASF/sam/drivers/twi</Value>
+      <Value>../src/ASF/sam/drivers/matrix</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
@@ -484,6 +509,9 @@
       <Value>../src/ASF/sam/drivers/usart</Value>
       <Value>../src/ASF/sam/drivers/efc</Value>
       <Value>../src/ASF/sam/services/flash_efc</Value>
+      <Value>../src/ASF/common/services/twi</Value>
+      <Value>../src/ASF/sam/drivers/twi</Value>
+      <Value>../src/ASF/sam/drivers/matrix</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -491,7 +519,11 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\ASF\common\services\twi\" />
+    <Folder Include="src\ASF\common\services\twi\sam_twi\" />
     <Folder Include="src\ASF\sam\drivers\efc\" />
+    <Folder Include="src\ASF\sam\drivers\matrix\" />
+    <Folder Include="src\ASF\sam\drivers\twi\" />
     <Folder Include="src\ASF\sam\services\" />
     <Folder Include="src\ASF\sam\services\flash_efc\" />
     <Folder Include="workspace" />
@@ -557,13 +589,43 @@
     <Folder Include="workspace\sys\src" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\ASF\common\services\twi\twi_slave.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\twi\sam_twi\twi_master.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\twi\twi_master.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\twi\sam_twi\twi_slave.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\ASF\sam\drivers\efc\efc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam\drivers\matrix\matrix.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\sam\drivers\matrix\matrix.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\sam\drivers\twi\twi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\sam\drivers\twi\twi.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="workspace\peripheral_interface\inc\yy_i2c_api.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\peripheral_interface\inc\yy_rstc_api.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\peripheral_interface\inc\yy_systick_api.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\peripheral_interface\src\yy_i2c_api.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\peripheral_interface\src\yy_rstc_api.c">
@@ -584,7 +646,13 @@
     <Compile Include="workspace\shell\src\yysh_xmodem_cmds.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="workspace\sys\inc\yy_i2c_slave_interrupt.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="workspace\sys\inc\yy_relocate.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\sys\src\yy_i2c_slave_interrupt.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\sys\src\yy_relocate.c">

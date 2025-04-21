@@ -17,4 +17,11 @@ void yy_peripheral_init()
 	
 	/* Uart Init */
 	yy_uart_init();
+	
+	/* I2c Init (Slave) */
+	yy_i2c_slave_init(I2C_TWI1, SLAVE_ADDRESS);
+	yy_i2c_slave_interrupt_init(I2C_TWI1);
+	
+	
+
 }

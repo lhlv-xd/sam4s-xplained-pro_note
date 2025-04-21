@@ -8,6 +8,7 @@
 #include <asf.h>
 #include "yysh_information.h"
 #include "yysh_customization_cmds.h"
+#include "yy_i2c_slave_interrupt.h"
 
 extern uint32_t _sfixed, _efixed, _etext, _srelocate, _erelocate, _sbss, _ebss, _sstack, _estack, __ram_end__, _end;
 
@@ -50,4 +51,33 @@ void yysh_show_linker_address(void *data)
 void yysh_clear(void* data)
 {
 	SHELL_PRINTF("\x1B[2J\x1B[H");
+}
+
+
+void yysh_show_i2c_pages(void* data)
+{
+
+	
+	uint8_t count = 0;
+	SHELL_PRINTF("\r\nBasicPage: 0x%x\r\n", BasicPage);
+	for (uint32_t i = 0; i < 128; i++) {
+		SHELL_PRINTF("0x%02x, ", BasicPage[i]);
+		count++;
+		if (count % 16 == 0) {
+			SHELL_PRINTF("\r\n");
+			count = 0;
+		}
+	}
+	
+	count = 0;
+	SHELL_PRINTF("\r\Page00h:0x%x\r\n", Page00h);
+	for (uint32_t i = 0; i < 128; i++) {
+		SHELL_PRINTF("0x%02x, ", Page00h[i]);
+		count++;
+		if (count % 16 == 0) {
+			SHELL_PRINTF("\r\n");
+			count = 0;
+		}
+		
+	}
 }

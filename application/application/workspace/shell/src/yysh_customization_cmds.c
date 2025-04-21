@@ -26,6 +26,7 @@ void yysh_help(void* data)
 	"  flashwrite <address> <value>                   Write mcu flash.\r\n"
 	"  flashunlock <address> <total_size>             Unlock flash.\r\n"
 	"  flashlock <address> <total_size>               Lock flash.\r\n"
+	"  show_i2cpages                                  Show i2c pages for debug\r\n"
 	"  show_linker                                    Show linker address.\r\n"
 	"  xmodem <address>                               FW update by xmodem.\r\n"
 	"  jumpto <address>                               Relocate to new Entry point.\r\n";
@@ -46,6 +47,7 @@ struct cmd cmds[] = {
 	{"show_linker",      yysh_show_linker_address},
 	{"xmodem",           yysh_xmodem_update      },
 	{"jumpto",           yysh_relocate           },
+	{"show_i2cpages",    yysh_show_i2c_pages     }
 };
 
 /*

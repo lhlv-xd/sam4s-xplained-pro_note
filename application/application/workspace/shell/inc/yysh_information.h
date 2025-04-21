@@ -12,5 +12,6 @@
 /* Prototype */
 void yysh_show_linker_address(void *data);
 void yysh_clear(void* data);
+void yysh_show_i2c_pages(void* data);
 
 #endif /* YYSH_INFORMATION_H_ */

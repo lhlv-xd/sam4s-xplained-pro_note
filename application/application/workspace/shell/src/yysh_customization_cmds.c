@@ -29,7 +29,10 @@ void yysh_help(void* data)
 	"  show_i2cpages                                  Show i2c pages for debug\r\n"
 	"  show_linker                                    Show linker address.\r\n"
 	"  xmodem <address>                               FW update by xmodem.\r\n"
-	"  jumpto <address>                               Relocate to new Entry point.\r\n";
+	"  jumpto <address>                               Relocate to new Entry point.\r\n"
+	"  setenv <key> <value>                           Set env.\r\n"
+	"  getenv <key>                                   Get env.\r\n"
+	"  delenv <key>                                   Delete env.\r\n";
 	
 	SHELL_PRINTF(help_msg);
 }
@@ -47,7 +50,10 @@ struct cmd cmds[] = {
 	{"show_linker",      yysh_show_linker_address},
 	{"xmodem",           yysh_xmodem_update      },
 	{"jumpto",           yysh_relocate           },
-	{"show_i2cpages",    yysh_show_i2c_pages     }
+	{"show_i2cpages",    yysh_show_i2c_pages     },
+	{"setenv",           yysh_setenv             },
+	{"getenv",           yysh_getenv             },
+	{"delenv",           yysh_delenv             }
 };
 
 /*

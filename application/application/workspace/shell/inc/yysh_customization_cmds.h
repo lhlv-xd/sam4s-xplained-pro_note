@@ -17,6 +17,7 @@
 #include "yysh_memory_cmds.h"
 #include "yysh_information.h"
 #include "yysh_xmodem_cmds.h"
+#include "yysh_env_cmds.h"
 
 /* Structure */
 struct cmd {

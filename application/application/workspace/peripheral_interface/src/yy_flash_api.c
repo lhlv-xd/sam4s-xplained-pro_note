@@ -78,6 +78,7 @@ uint32_t yy_flash_erase(uint32_t addr, FLASH_ERADED_MODE_E mode)
  */
 uint32_t yy_flash_write(uint32_t addr, uint8_t* data_ptr, uint32_t data_size, FLASH_ERADED_MODE_E mode)
 {
+	//show("address: 0x%x, size: 0x%x\r\n", addr, data_size);
 	uint32_t status;
 	/* Flash Init */
 	status = flash_init(FLASH_ACCESS_MODE_128, 6);
@@ -97,8 +98,8 @@ uint32_t yy_flash_write(uint32_t addr, uint8_t* data_ptr, uint32_t data_size, FL
 	if (status != FLASH_RC_OK) {
 		return status;
 	}
-	
-	
+	while (!(EFC0->EEFC_FSR & EEFC_FSR_FRDY));
+
 	/* Start of erase size */
 	if (addr % total_size == 0) {
 		/* Unlock (Avoid partial erase area not unlocked) */
@@ -106,7 +107,8 @@ uint32_t yy_flash_write(uint32_t addr, uint8_t* data_ptr, uint32_t data_size, FL
 		if (status != FLASH_RC_OK) {
 			return status;
 		}
-		
+		while (!(EFC0->EEFC_FSR & EEFC_FSR_FRDY));
+
 		/* Erase */
 		switch (mode) {
 			case ERASED_PAGES_4:
@@ -114,15 +116,18 @@ uint32_t yy_flash_write(uint32_t addr, uint8_t* data_ptr, uint32_t data_size, FL
 			case ERASED_PAGES_16:
 			case ERASED_PAGES_32:
 				status = flash_erase_page(addr, mode);
+				while (!(EFC0->EEFC_FSR & EEFC_FSR_FRDY));
 				break;
 			case ERASED_SECTOR:
 				status = flash_erase_sector(addr);
+				while (!(EFC0->EEFC_FSR & EEFC_FSR_FRDY));
 				break;
 			case ERASED_BANK:
 				if (addr < 0x500000) {
 					return FLASH_RC_INVALID;
 				}
 				status = flash_erase_all(addr);
+				while (!(EFC0->EEFC_FSR & EEFC_FSR_FRDY));
 				break;
 			case ERADED_SKIP:
 				status = FLASH_RC_OK;
@@ -136,12 +141,13 @@ uint32_t yy_flash_write(uint32_t addr, uint8_t* data_ptr, uint32_t data_size, FL
 			return status;
 		}
 	}
-	
+
 	/* Write */
 	status = flash_write(addr, data_ptr, data_size, 0);
 	if (status != FLASH_RC_OK) {
 		return status;
 	}
+	while (!(EFC0->EEFC_FSR & EEFC_FSR_FRDY));
 	
 	/* Lock (minimux is 8K) */
 	// If it is less than 8K, it will automatically fill in to multiples of 8K
@@ -149,7 +155,11 @@ uint32_t yy_flash_write(uint32_t addr, uint8_t* data_ptr, uint32_t data_size, FL
 	if (status != FLASH_RC_OK) {
 		return status;
 	}
-	
+
+	while (!(EFC0->EEFC_FSR & EEFC_FSR_FRDY));
+	//show("gmtk_flash_write status: %d\r\n", status);
+	__DSB();
+	__ISB();
 	return FLASH_RC_OK;
 }
 

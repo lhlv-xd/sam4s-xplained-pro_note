@@ -40,6 +40,7 @@ void yysh_xmodem_update(void *data)
 	SHELL_PRINTF("Wait to xmodem connect...\r\n");
 	is_xmodem = 1;
 	
+	int8_t timeout = 5;
 	static uint16_t crc = 0;
 	static uint16_t crc_calc = 0;
 	
@@ -70,10 +71,26 @@ void yysh_xmodem_update(void *data)
 					
 					
 					/* Response ACK */
-					SHELL_PRINTF("%c", XMODEM_ACK);
-					xmodem_mode = XMODEM_RECV_DATA;
-				} else {
+					if (status == FLASH_RC_OK) {
+						timeout = 5; // recovery
+						SHELL_PRINTF("%c", XMODEM_ACK);
+						xmodem_mode = XMODEM_RECV_DATA;
+					}
+					/* Response NAK */
+					else {
+						if (timeout-- <= 0) {
+							return;
+						}
+						
+						SHELL_PRINTF("%c", XMODEM_NAK);
+						xmodem_mode = XMODEM_RECV_DATA;
+					}
 					
+				} 
+				else {
+					if (timeout-- <= 0) {
+						return;
+					}
 					/* Response NAK */
 					SHELL_PRINTF("%c", XMODEM_NAK);
 					xmodem_mode = XMODEM_RECV_DATA;

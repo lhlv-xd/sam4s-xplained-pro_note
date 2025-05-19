@@ -22,6 +22,9 @@ void yy_peripheral_init()
 	yy_i2c_slave_init(I2C_TWI1, SLAVE_ADDRESS);
 	yy_i2c_slave_interrupt_init(I2C_TWI1);
 	
+	/* GPIO Init */
+	yy_gpio_init();
+	
 	
 
 }

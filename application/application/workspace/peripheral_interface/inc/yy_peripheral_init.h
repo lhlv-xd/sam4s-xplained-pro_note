@@ -15,6 +15,7 @@
 #include "yy_rstc_api.h"
 #include "yy_i2c_api.h"
 #include "yy_i2c_slave_interrupt.h"
+#include "yy_gpio_api.h"
 
 /* Prototype */
 void yy_peripheral_init();

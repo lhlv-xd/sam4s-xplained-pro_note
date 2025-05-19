@@ -7,6 +7,7 @@
 
 #include <asf.h>
 #include "yy_systick_api.h"
+#include "yy_peripheral_init.h"
 
 /* variable */
 volatile static uint32_t tick_counter;
@@ -44,7 +45,8 @@ void test_systick_api()
 {
 	uint32_t start, end;
 	start = yy_get_systick();
-	delay_ms(1000);
+	//delay_ms(1000);
+	yy_delay_1s_by_while();
 	end = yy_get_systick();
 	
 	printf("timer: %d (ms)\r\n", end - start);

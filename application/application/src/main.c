@@ -45,9 +45,10 @@ int main (void)
 	
 	/* Test */
 	//test_flash_api();
-	//test_systick_api();
-	test_gpio_pa24_interrupt();
-
+	test_systick_api();
+	//test_gpio_pa24_interrupt();
+	
+	
 	/* Start */
 	yy_check_reset_reason();
 	yy_show("\r\n------- Start -------\r\n");

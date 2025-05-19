@@ -616,6 +616,9 @@
     <None Include="src\ASF\sam\drivers\twi\twi.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="workspace\peripheral_interface\inc\yy_delay_api.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="workspace\peripheral_interface\inc\yy_gpio_api.h">
       <SubType>compile</SubType>
     </Compile>
@@ -626,6 +629,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\peripheral_interface\inc\yy_systick_api.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\peripheral_interface\src\yy_delay_api.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\peripheral_interface\src\yy_gpio_api.c">

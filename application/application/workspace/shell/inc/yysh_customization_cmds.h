@@ -18,6 +18,7 @@
 #include "yysh_information.h"
 #include "yysh_xmodem_cmds.h"
 #include "yysh_env_cmds.h"
+#include "yysh_i2c_cmds.h"
 
 /* Structure */
 struct cmd {

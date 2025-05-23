@@ -30,6 +30,6 @@ typedef enum {
 /* Prototype */
 void yy_i2c_slave_init(I2C_INTERFACE_E interface, uint32_t slave_address);
 void yy_i2c_slave_interrupt_init(I2C_INTERFACE_E interface);
-
+void yy_i2c_slave_interrupt_deinit(I2C_INTERFACE_E interface);
 
 #endif /* YY_I2C_API_H_ */

@@ -649,6 +649,9 @@
     <Compile Include="workspace\shell\inc\yysh_env_cmds.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="workspace\shell\inc\yysh_i2c_cmds.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="workspace\shell\inc\yysh_information.h">
       <SubType>compile</SubType>
     </Compile>
@@ -656,6 +659,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\shell\src\yysh_env_cmds.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="workspace\shell\src\yysh_i2c_cmds.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="workspace\shell\src\yysh_information.c">

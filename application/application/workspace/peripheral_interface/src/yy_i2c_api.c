@@ -77,3 +77,26 @@ void yy_i2c_slave_interrupt_init(I2C_INTERFACE_E interface)
 			break;
 	}
 }
+
+
+void yy_i2c_slave_interrupt_deinit(I2C_INTERFACE_E interface)
+{
+	switch (interface) {
+		case I2C_TWI0:
+			/* Clear receipt buffer */
+			twi_read_byte(TWI0);
+		
+			/* Configure TWI interrupts */
+			NVIC_DisableIRQ(TWI0_IRQn);
+			twi_disable_interrupt(TWI0, TWI_SR_SVACC);
+			break;
+		case I2C_TWI1:
+			/* Clear receipt buffer */
+			twi_read_byte(TWI1);
+		
+			/* Configure TWI interrupts */
+			NVIC_DisableIRQ(TWI1_IRQn);
+			twi_disable_interrupt(TWI1, TWI_SR_SVACC);
+		break;
+	}
+}

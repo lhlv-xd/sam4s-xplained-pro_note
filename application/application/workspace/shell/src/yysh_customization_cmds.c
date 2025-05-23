@@ -32,28 +32,32 @@ void yysh_help(void* data)
 	"  jumpto <address>                               Relocate to new Entry point.\r\n"
 	"  setenv <key> <value>                           Set env.\r\n"
 	"  getenv <key>                                   Get env.\r\n"
-	"  delenv <key>                                   Delete env.\r\n";
+	"  delenv <key>                                   Delete env.\r\n"
+	"  i2c_slave_enable                               Enable I2C slave.\r\n"
+	"  i2c_slave_disable                              Disable I2C slave.\r\n";
 	
 	SHELL_PRINTF(help_msg);
 }
 
 /* Add your customized callback function to this */
 struct cmd cmds[] = {
-	{"help",             yysh_help               },
-	{"clear",            yysh_clear              },
-	{"memread",          yysh_read_memory        },
-	{"memwrite",         yysh_write_memory       },
-	{"flasherase",       yysh_erase_flash        },
-	{"flashwrite",       yysh_write_flash        },
-	{"flashunlock",      yysh_unlock_flash       },
-	{"flashlock",        yysh_lock_flash         },
-	{"show_linker",      yysh_show_linker_address},
-	{"xmodem",           yysh_xmodem_update      },
-	{"jumpto",           yysh_relocate           },
-	{"show_i2cpages",    yysh_show_i2c_pages     },
-	{"setenv",           yysh_setenv             },
-	{"getenv",           yysh_getenv             },
-	{"delenv",           yysh_delenv             }
+	{"help",               yysh_help               },
+	{"clear",              yysh_clear              },
+	{"memread",            yysh_read_memory        },
+	{"memwrite",           yysh_write_memory       },
+	{"flasherase",         yysh_erase_flash        },
+	{"flashwrite",         yysh_write_flash        },
+	{"flashunlock",        yysh_unlock_flash       },
+	{"flashlock",          yysh_lock_flash         },
+	{"show_linker",        yysh_show_linker_address},
+	{"xmodem",             yysh_xmodem_update      },
+	{"jumpto",             yysh_relocate           },
+	{"show_i2cpages",      yysh_show_i2c_pages     },
+	{"setenv",             yysh_setenv             },
+	{"getenv",             yysh_getenv             },
+	{"delenv",             yysh_delenv             },
+	{"i2c_slave_enable",   yysh_i2c_slave_enable   },
+	{"i2c_slave_disable",  yysh_i2c_slave_disable  }
 };
 
 /*
